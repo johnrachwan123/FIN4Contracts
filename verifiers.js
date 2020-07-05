@@ -29,7 +29,16 @@ const verifierOptions = {
         "Determines if and which sensor data must be provided by the claimer.",
     },
     userData: {
-      values: ["None", "Picture", "Video", "Password", "Address", "File", "GroupID"],
+      values: [
+        "None",
+        "Picture",
+        "Video",
+        "Password",
+        "Address",
+        "File",
+        "GroupID", 
+        "Integer"
+      ],
       description:
         "Determines if and which content must be provided by the claimer.",
     },
@@ -235,6 +244,18 @@ const verifiers = {
     },
     description:
       "The token creator sets a cap how many times a token can be successfully claimed",
+    address: "",
+  },
+  CoinFlip: {
+    chain: "Off-Chain",
+    type: "Non-Interactive",
+    claimerInput: {
+      inputType: "User generated data",
+      sensorData: "None",
+      userData: "Integer",
+    },
+    description:
+      "A coinflip from the claimer [0/1] has to match the verifier's coinflip",
     address: "",
   },
 };

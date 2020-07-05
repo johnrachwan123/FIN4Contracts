@@ -32,7 +32,8 @@ const verifierTypeContracts = [
 	artifacts.require('ClaimableOnlyNTimesPerUser'),
 	artifacts.require('LimitedVoting'),
 	artifacts.require('PictureVoting'),
-	artifacts.require('VideoVoting')
+  artifacts.require('VideoVoting'),
+  artifacts.require('CoinFlip')
 	//artifacts.require('SensorOneTimeSignal'),
 ];
 
