@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.5.17;
 
 import "contracts/provable/provableAPI_0.5.sol";
 import "contracts/verifiers/Fin4BaseVerifierType.sol";

@@ -36,8 +36,8 @@ const verifierOptions = {
         "Password",
         "Address",
         "File",
-        "GroupID", 
-        "Integer"
+        "GroupID",
+        "String",
       ],
       description:
         "Determines if and which content must be provided by the claimer.",
@@ -252,7 +252,7 @@ const verifiers = {
     claimerInput: {
       inputType: "User generated data",
       sensorData: "None",
-      userData: "Integer",
+      userData: "String",
     },
     description:
       "A coinflip from the claimer [0/1] has to match the verifier's coinflip",
