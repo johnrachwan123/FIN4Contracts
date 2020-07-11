@@ -13,7 +13,7 @@ contract Fin4VerifyingStub {
     function submitProof_MaximumQuantityPerInterval(address tokenAddrToReceiveVerifierNotice, uint claimId) public;
     function submitProof_MinimumInterval(address tokenAddrToReceiveVerifierNotice, uint claimId) public;
     function submitProof_SelfApprove(address tokenAddrToReceiveVerifierNotice, uint claimId) public;
-    function submitProof_CoinFlip(address tokenAddrToReceiveVerifierNotice, uint claimId, string memory claimFlip) public;
+    function submitProof_CoinFlip(address tokenAddrToReceiveVerifierNotice, uint claimId, string memory claimFlip) public payable;
     function sensorSignalReceived(string memory sensorID, uint timestamp, string memory data) public;
     // Set Verifier Parameters
     function setParameters(address token, address[] memory param1, uint[] memory param2) public;
