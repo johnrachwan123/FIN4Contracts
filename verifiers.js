@@ -5,8 +5,7 @@
 const verifierOptions = {
   chain: {
     values: ["On-Chain", "Off-Chain"],
-    description:
-      "Determines whether the verification is done on or off chain",
+    description: "Determines whether the verification is done on or off chain",
   },
   type: {
     // Interactive: Requires Claimer to do something
@@ -41,6 +40,8 @@ const verifierOptions = {
       ],
       description:
         "Determines if and which content must be provided by the claimer.",
+      // optional parameter: is defined when the verifier execution requires wei
+      requiredValue: 0,
     },
   },
 };
@@ -56,7 +57,6 @@ const verifiers = {
     },
     description:
       "Approval if the user provides the password matching the one the token creator set.",
-    address: "",
   },
   Picture: {
     chain: "On-Chain",
@@ -68,7 +68,6 @@ const verifiers = {
     },
     description:
       "The claimer has to supply a picture, based on which the approver will decide to approve.",
-    address: "",
   },
   Blacklisting: {
     chain: "On-Chain",
@@ -80,7 +79,6 @@ const verifiers = {
     },
     description:
       "The token creator defines group(s) and/or individual accounts that can not claim a token.",
-    address: "",
   },
   Whitelisting: {
     chain: "On-Chain",
@@ -92,7 +90,6 @@ const verifiers = {
     },
     description:
       "The token creator defines group(s) and/or individual accounts that can claim a token while everyone else can not",
-    address: "",
   },
   Location: {
     chain: "On-Chain",
@@ -104,7 +101,6 @@ const verifiers = {
     },
     description:
       "A location, which is within a radius of a location the token creator defines, needs to be provided.",
-    address: "",
   },
   SelfApprove: {
     chain: "On-Chain",
@@ -115,7 +111,6 @@ const verifiers = {
       userData: "None",
     },
     description: "Claimers approve their own claim.",
-    address: "",
   },
   SelfieTogether: {
     chain: "On-Chain",
@@ -127,7 +122,6 @@ const verifiers = {
     },
     description:
       "The claimer supplies a picture, based on which a self-chosen approver and a member of a group of users appointed by the token creator decide to approve.",
-    address: "",
   },
   // verifiers that are commented out are not deployed in 2_deploy_contracts.js yet
   //SensorOneTimeSignal: {
@@ -151,7 +145,6 @@ const verifiers = {
     },
     description:
       "The token creator specifies one or more user groups, of which one member has to approve.",
-    address: "",
   },
   SpecificAddress: {
     chain: "On-Chain",
@@ -162,7 +155,6 @@ const verifiers = {
       userData: "Address",
     },
     description: "The claimer specifies an address, which has to approve.",
-    address: "",
   },
   LimitedVoting: {
     chain: "On-Chain",
@@ -173,11 +165,10 @@ const verifiers = {
       userData: "File",
     },
     description: "The proof is sent to the users due to a random mechanism",
-    address: "",
   },
   // verifiers that are commented out are not deployed in 2_deploy_contracts.js yet
   //MaximumQuantityPerInterval: {
-    // chain: "On-Chain",
+  // chain: "On-Chain",
   //  type: "Non-Inveractive",
   //  claimerInput: {
   //    inputType: "None",
@@ -189,7 +180,7 @@ const verifiers = {
   //  address: "",
   //},
   //MinimumInterval: {
-    // chain: "On-Chain",
+  // chain: "On-Chain",
   //  type: "Non-Inveractive",
   //  claimerInput: {
   //    inputType: "None",
@@ -209,7 +200,6 @@ const verifiers = {
     },
     description:
       "The claimer has to supply a picture, based on which the approver will decide to approve.",
-    address: "",
   },
   TokenCreatorApproval: {
     chain: "On-Chain",
@@ -220,7 +210,6 @@ const verifiers = {
       userData: "None",
     },
     description: "The token creator has to approve.",
-    address: "",
   },
   VideoVoting: {
     chain: "On-Chain",
@@ -232,7 +221,6 @@ const verifiers = {
     },
     description:
       "The claimer has to supply a video, based on which the approver will decide to approve.",
-    address: "",
   },
   ClaimableOnlyNTimesPerUser: {
     chain: "On-Chain",
@@ -244,7 +232,6 @@ const verifiers = {
     },
     description:
       "The token creator sets a cap how many times a token can be successfully claimed",
-    address: "",
   },
   CoinFlip: {
     chain: "Off-Chain",
@@ -256,7 +243,7 @@ const verifiers = {
     },
     description:
       "A coinflip from the claimer [0/1] has to match the verifier's coinflip",
-    address: "",
+    requiredValue: 4000000000000000,
   },
 };
 
