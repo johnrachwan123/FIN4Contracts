@@ -40,12 +40,10 @@ contract CoinFlip is usingProvable, Fin4BaseVerifierType {
     }
 
     function __callback(bytes32 myId, string memory result) public {
-        Claim storage claim = pendingQueries[myId];
-        require(msg.sender == provable_cbAddress());
-        require(claim.pending == true);
+        Claim memory claim = pendingQueries[myId];
+        // require(msg.sender == provable_cbAddress());
+        // require(claim.pending == true);
         emit LogNewProvableResult(result);
-
-        delete pendingQueries[myId]; // This effectively marks the query id as processed.
         if (
             keccak256(abi.encodePacked((result))) ==
             keccak256(abi.encodePacked(("true")))
@@ -73,6 +71,7 @@ contract CoinFlip is usingProvable, Fin4BaseVerifierType {
                 message
             );
         }
+        delete pendingQueries[myId]; // This effectively marks the query id as processed.
     }
 
     function submitProof_CoinFlip(
@@ -80,19 +79,20 @@ contract CoinFlip is usingProvable, Fin4BaseVerifierType {
         uint256 claimId,
         string memory claimFlip
     ) public payable {
+        Claim memory c;
         if (provable_getPrice("URL") > msg.value) {
             revert(
                 "Provable query was NOT sent, please add some ETH to cover for the query fee!"
             );
         } else {
+            bytes32 queryId = provable_query("URL", append(claimFlip));
+            c.tokenAddrToReceiveVerifierNotice = tokenAddrToReceiveVerifierNotice;
+            c.claimId = claimId;
+            c.pending = true;
+            pendingQueries[queryId] = c;
+            _sendPendingNotice(address(this), tokenAddrToReceiveVerifierNotice, claimId);
             emit LogNewProvableQuery(
                 "Provable query was sent, standing by for the answer..."
-            );
-            bytes32 queryId = provable_query("URL", append(claimFlip));
-            pendingQueries[queryId] = Claim(
-                tokenAddrToReceiveVerifierNotice,
-                claimId,
-                true
             );
         }
     }
