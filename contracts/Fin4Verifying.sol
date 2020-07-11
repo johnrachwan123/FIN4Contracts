@@ -116,6 +116,9 @@ contract Fin4Verifying {
     function submitProof_SelfApprove(address tokenAddrToReceiveVerifierNotice, uint claimId, string memory verifierName) public{
         Fin4VerifyingStub(verifiers[verifierName]).submitProof_SelfApprove(tokenAddrToReceiveVerifierNotice,claimId);
     }
+    function submitProof_CoinFlip(address tokenAddrToReceiveVerifierNotice, uint claimId, string memory verifierName, string memory claimFlip) public{
+        Fin4VerifyingStub(verifiers[verifierName]).submitProof_CoinFlip(tokenAddrToReceiveVerifierNotice,claimId, claimFlip);   
+    }
     // function sensorSignalReceived(string memory sensorID, uint timestamp, string memory data) public{
         // Fin4VerifyingStub(verifiers["SensorOneTimeSignal"]).sensorSignalReceived(sensorID,timestamp,data);
     // }
