@@ -314,7 +314,7 @@ contract usingProvable {
     }
 
     function provable_setNetwork() internal returns (bool _networkSet) {
-        OAR = OracleAddrResolverI(0xDca2f2b432F5a16B33C0Fc8dD5C402c678611f9A);
+        OAR = OracleAddrResolverI(0x6f485C8BF6fc43eA212E93BBF8ce046C7f1cb475);
         return true;
     }
     /**
