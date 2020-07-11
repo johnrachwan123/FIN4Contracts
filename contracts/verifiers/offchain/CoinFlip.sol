@@ -75,7 +75,6 @@ contract CoinFlip is usingProvable, Fin4BaseVerifierType {
         }
     }
 
-    // should require less than 250000 wei
     function submitProof_CoinFlip(
         address tokenAddrToReceiveVerifierNotice,
         uint256 claimId,
