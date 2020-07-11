@@ -2,6 +2,7 @@ pragma solidity ^0.5.17;
 
 import "contracts/provable/provableAPI_0.5.sol";
 import "contracts/verifiers/Fin4BaseVerifierType.sol";
+// import "contracts/stub/Fin4TokenStub.sol";
 
 contract CoinFlip is usingProvable, Fin4BaseVerifierType {
     string public RESULT_PROPERTY = "Result";
@@ -55,23 +56,20 @@ contract CoinFlip is usingProvable, Fin4BaseVerifierType {
                 ""
             );
         } else {
-            string memory message = string(
-                abi.encodePacked(
-                    "Your claim on token '",
-                    Fin4TokenStub(claim.tokenAddrToReceiveVerifierNotice)
-                        .name(),
-                    "' got rejected from verifier type 'CoinFlip' because",
-                    " your flip did not match with the verifier's flip."
-                )
-            );
+            // string memory message = string(abi.encodePacked(
+            //     "Your claim on token '",
+            //     Fin4TokenStub(claim.tokenAddrToReceiveVerifierNotice).name(),
+            //     "' got rejected from verifier type 'CoinFlip' because",
+            //     " your flip did not match with the verifier's flip."));
             _sendRejectionNotice(
                 address(this),
                 claim.tokenAddrToReceiveVerifierNotice,
                 claim.claimId,
-                message
+                ""
+                // message
             );
         }
-        delete pendingQueries[myId]; // This effectively marks the query id as processed.
+        // delete pendingQueries[myId]; // This effectively marks the query id as processed.
     }
 
     function submitProof_CoinFlip(
