@@ -39,12 +39,11 @@ contract CoinFlip is usingProvable, Fin4BaseVerifierType {
                 )
             );
     }
-
+    // Function that is called back by provable once the calculation is done
     function __callback(bytes32 myId, string memory result) public {
         Claim memory claim = pendingQueries[myId];
-        // require(msg.sender == provable_cbAddress());
-        // require(claim.pending == true);
         emit LogNewProvableResult(result);
+        // Check to see if what the claimer chose is equivalent to the coin flip done by provable
         if (
             keccak256(abi.encodePacked((result))) ==
             keccak256(abi.encodePacked(("true")))
@@ -56,20 +55,13 @@ contract CoinFlip is usingProvable, Fin4BaseVerifierType {
                 ""
             );
         } else {
-            // string memory message = string(abi.encodePacked(
-            //     "Your claim on token '",
-            //     Fin4TokenStub(claim.tokenAddrToReceiveVerifierNotice).name(),
-            //     "' got rejected from verifier type 'CoinFlip' because",
-            //     " your flip did not match with the verifier's flip."));
             _sendRejectionNotice(
                 address(this),
                 claim.tokenAddrToReceiveVerifierNotice,
                 claim.claimId,
                 ""
-                // message
             );
         }
-        // delete pendingQueries[myId]; // This effectively marks the query id as processed.
     }
 
     function submitProof_CoinFlip(
@@ -87,6 +79,7 @@ contract CoinFlip is usingProvable, Fin4BaseVerifierType {
             c.tokenAddrToReceiveVerifierNotice = tokenAddrToReceiveVerifierNotice;
             c.claimId = claimId;
             c.pending = true;
+            // Store query to be accessed in callback
             pendingQueries[queryId] = c;
             _sendPendingNotice(address(this), tokenAddrToReceiveVerifierNotice, claimId);
             emit LogNewProvableQuery(

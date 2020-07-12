@@ -2,7 +2,7 @@ pragma solidity ^0.5.17;
 
 import 'contracts/stub/Fin4VerifyingStub.sol';
 import 'contracts/verifiers/Fin4BaseVerifierType.sol';
-
+// Contract that handles communication between the FIN4 system and the verifier system
 contract Fin4Verifying {
 
     event SubmissionAdded(uint submissionId, address verifierType, address token, address user,
@@ -43,7 +43,7 @@ contract Fin4Verifying {
         return false;
     }
 
-    // Verifier Parameter Submition
+    // Verifier Parameter Submition that is done on Token Creation
     function setParameters_Whitelisting(address token, string memory verifierName, address[] memory whitelistedUsers, uint[] memory whitelistedGroupIds) public{
         Fin4VerifyingStub(verifiers[verifierName]).setParameters(token, whitelistedUsers, whitelistedGroupIds);
     }
@@ -119,9 +119,6 @@ contract Fin4Verifying {
     function submitProof_CoinFlip(address tokenAddrToReceiveVerifierNotice, uint claimId, string memory verifierName, string memory claimFlip) public payable{
         Fin4VerifyingStub(verifiers[verifierName]).submitProof_CoinFlip.value(msg.value)(tokenAddrToReceiveVerifierNotice,claimId, claimFlip);   
     }
-    // function sensorSignalReceived(string memory sensorID, uint timestamp, string memory data) public{
-        // Fin4VerifyingStub(verifiers["SensorOneTimeSignal"]).sensorSignalReceived(sensorID,timestamp,data);
-    // }
 
     // Voting Interaction
     function isEligibleToBeAVoter() public returns(bool){
