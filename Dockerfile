@@ -16,3 +16,7 @@ RUN npm install --silent
 
 # truffle
 RUN npm install -g truffle --silent
+
+# wakes up off-chain verifier
+RUN curl --silent --output null http://coin-flip-api.herokuapp.com/flip?claim=1
+
